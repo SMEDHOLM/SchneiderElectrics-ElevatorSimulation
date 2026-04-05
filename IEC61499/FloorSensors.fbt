@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType Name="FloorSensors" Comment="Composite Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="6" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="7/12/2016" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="CarPos" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="CarAtFloor" />
+        <With Var="CarAt0" />
+        <With Var="CarAt1" />
+        <With Var="CarAt2" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="CarPos" Type="REAL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="CarAtFloor" Type="INT" Comment="Output event qualifier" />
+      <VarDeclaration Name="CarAt0" Type="BOOL" />
+      <VarDeclaration Name="CarAt1" Type="BOOL" />
+      <VarDeclaration Name="CarAt2" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="1" Name="FB1" Type="FloorCarElevator" x="820" y="460" Namespace="Main" />
+    <FB ID="2" Name="FB2" Type="ChangeDetect_B" x="1640" y="460" Namespace="Main" />
+    <FB ID="3" Name="FB3" Type="ChangeDetect_B" x="1640" y="900" Namespace="Main" />
+    <FB ID="4" Name="FB4" Type="ChangeDetect_B" x="1640" y="1320" Namespace="Main" />
+    <FB ID="5" Name="FB5" Type="ChangeDetect_B" x="1660" y="1760" Namespace="Main" />
+    <FB ID="6" Name="FB6" Type="MergeEvents" x="2840" y="460" Namespace="Main" />
+    <Input Name="REQ" x="180" y="471.8542" Type="Event" />
+    <Input Name="CarPos" x="180" y="671.8542" Type="Data" />
+    <Output Name="CNF" x="3300" y="471.8542" Type="Event" />
+    <Output Name="CarAtFloor" x="2100" y="671.8542" Type="Data" />
+    <Output Name="CarAt0" x="2100" y="1111.854" Type="Data" />
+    <Output Name="CarAt1" x="2100" y="1531.854" Type="Data" />
+    <Output Name="CarAt2" x="2120" y="1971.854" Type="Data" />
+    <EventConnections>
+      <Connection Source="FB1.CNF" Destination="FB2.REQ" />
+      <Connection Source="FB1.CNF" Destination="FB3.REQ" dx1="231.2084">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB1.CNF" Destination="FB4.REQ" dx1="231.2084">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB1.CNF" Destination="FB5.REQ" dx1="231.2084">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB2.CHG" Destination="FB6.EI1" />
+      <Connection Source="FB3.CHG" Destination="FB6.EI2" dx1="667.2292">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB4.CHG" Destination="FB6.EI3" dx1="727.2292">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB5.CHG" Destination="FB6.EI4" dx1="767.2292">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="REQ" Destination="FB1.REQ" dx1="48.95837" />
+      <Connection Source="FB6.EO" Destination="CNF" dx1="40" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="FB1.CarAtFloor" Destination="FB2.INP" />
+      <Connection Source="FB1.CarAt0" Destination="FB3.INP" dx1="171.2084">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB1.CarAt1" Destination="FB4.INP" dx1="111.2084">
+        <AvoidsNodes>false</AvoidsNodes>
+      </Connection>
+      <Connection Source="FB1.CarAt2" Destination="FB5.INP" dx1="41.20837" />
+      <Connection Source="FB4.OUT" Destination="CarAt1" dx1="40" />
+      <Connection Source="FB5.OUT" Destination="CarAt2" dx1="40" />
+      <Connection Source="FB3.OUT" Destination="CarAt0" dx1="40" />
+      <Connection Source="FB2.OUT" Destination="CarAtFloor" dx1="40" />
+      <Connection Source="CarPos" Destination="FB1.CarPos" dx1="44.50006" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

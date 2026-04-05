@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="70606c63-882d-444a-b13b-d04571a2485c" Name="CabinControl" Comment="Basic Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="0" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/17/2016" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonOn0" />
+        <With Var="ButtonOn1" />
+        <With Var="ButtonOn2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+        <With Var="allClosed" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="OnFloor0" />
+        <With Var="OnFloor1" />
+        <With Var="OnFloor2" />
+        <With Var="ButtonOn0" />
+        <With Var="ButtonOn1" />
+        <With Var="ButtonOn2" />
+        <With Var="ButtonFor0" />
+        <With Var="ButtonFor1" />
+        <With Var="ButtonFor2" />
+        <With Var="allClosed" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="liftUp" />
+        <With Var="liftDown" />
+        <With Var="stoppd" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="liftUp" />
+        <With Var="liftDown" />
+        <With Var="stoppd" />
+        <With Var="y" />
+        <With Var="x" />
+        <With Var="doStop" />
+        <With Var="state" />
+      </Event>
+      <Event Name="RST" />
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="OnFloor0" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="OnFloor1" Type="BOOL" />
+      <VarDeclaration Name="OnFloor2" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn0" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn1" Type="BOOL" />
+      <VarDeclaration Name="ButtonOn2" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor0" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor1" Type="BOOL" />
+      <VarDeclaration Name="ButtonFor2" Type="BOOL" />
+      <VarDeclaration Name="allClosed" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="liftUp" Type="BOOL" />
+      <VarDeclaration Name="liftDown" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="stoppd" Type="BOOL" />
+      <VarDeclaration Name="y" Type="INT" />
+      <VarDeclaration Name="x" Type="INT" />
+      <VarDeclaration Name="doStop" Type="BOOL" />
+      <VarDeclaration Name="state" Type="STRING" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="stopalg,up,down,INIT,calculate" />
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="447.1638" y="117.4117" />
+      <ECState Name="INIT" x="988" y="300">
+        <ECAction Algorithm="INIT" Output="INITO" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="going_up" x="482.7779" y="1964.667">
+        <ECAction Algorithm="up" Output="CNF" />
+        <ECAction Algorithm="calculate" Output="CNF" />
+      </ECState>
+      <ECState Name="s_stopped" x="1654.651" y="1483.794">
+        <ECAction Algorithm="stopalg" Output="CNF" />
+        <ECAction Output="RST" />
+      </ECState>
+      <ECState Name="down" x="3362" y="1912">
+        <ECAction Algorithm="down" Output="CNF" />
+        <ECAction Algorithm="calculate" Output="CNF" />
+      </ECState>
+      <ECState Name="calculate" x="1496.111" y="688.3333">
+        <ECAction Algorithm="calculate" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="766.4241" y="139.8181">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="178.7555,26.23851,206.4572,37.03933" />
+      </ECTransition>
+      <ECTransition Source="calculate" Destination="going_up" Condition="(x&gt;y) AND (x&gt;=0)  AND allClosed" x="1003.12" y="1406.256">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="290.6613,309.3627,211.1427,407.0582" />
+      </ECTransition>
+      <ECTransition Source="INIT" Destination="calculate" Condition="1" x="1132.642" y="532.1139">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="265.4063,122.7745,293.2296,148.7906" />
+      </ECTransition>
+      <ECTransition Source="calculate" Destination="down" Condition="(x&lt;y) AND (x&gt;=0) AND allClosed" x="2440.054" y="1230.484">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="539.6235,256.5668,679.0742,347.0616" />
+      </ECTransition>
+      <ECTransition Source="down" Destination="s_stopped" Condition="x=y " x="2438.888" y="1749.195">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="666.6293,456.64,539.5428,423.2456" />
+      </ECTransition>
+      <ECTransition Source="calculate" Destination="calculate" Condition="REQ" x="1496.111" y="870.4194" />
+      <ECTransition Source="down" Destination="down" Condition="REQ" x="3362" y="2094.086" />
+      <ECTransition Source="going_up" Destination="going_up" Condition="REQ" x="482.7779" y="2146.753" />
+      <ECTransition Source="down" Destination="going_up" Condition="(x&gt;y) AND (x&gt;=0)  AND allClosed" x="1946.775" y="2016.1">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="596.0453,507.4763,377.5708,511.4721" />
+      </ECTransition>
+      <ECTransition Source="going_up" Destination="s_stopped" Condition="x=y" x="1051.791" y="1648.314">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="227.5231,422.2067,302.5004,391.1771" />
+      </ECTransition>
+      <ECTransition Source="going_up" Destination="down" Condition="(x&lt;y) AND (x&gt;=0) AND allClosed" x="1945.403" y="1859.713">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="377.1136,461.4763,595.588,457.4799" />
+      </ECTransition>
+      <ECTransition Source="s_stopped" Destination="calculate" Condition="1" x="1571.484" y="1171.747">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="399.0201,328.9178,386.9701,271.2365" />
+      </ECTransition>
+      <ECTransition Source="calculate" Destination="s_stopped" Condition="x=y AND (OnFloor0 OR OnFloor1 OR OnFloor2)" x="1651.782" y="1067.838">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="411.8825,236.6006,423.6079,294.2809" />
+      </ECTransition>
+    </ECC>
+    <Algorithm Name="stopalg">
+      <ST><![CDATA[;
+state := 'STOP';
+liftUp := FALSE;
+liftDown := FALSE;
+stoppd := TRUE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="up">
+      <ST><![CDATA[;
+state := 'UP';
+liftUp := TRUE;
+liftDown := FALSE;
+stoppd := FALSE;
+(* To continue going if all OnFloor are false*)
+IF NOT OnFloor0 OR NOT OnFloor1 OR NOT OnFloor2 THEN 
+	y := 3;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="down">
+      <ST><![CDATA[;
+state := 'DOWN';
+liftUp := FALSE;
+liftDown := TRUE;
+stoppd := FALSE;
+(* To continue going if all OnFloor are false*)
+IF NOT OnFloor0 OR NOT OnFloor1 OR NOT OnFloor2 THEN
+	y := -1;
+END_IF;]]></ST>
+    </Algorithm>
+    <Algorithm Name="calculate">
+      <ST><![CDATA[(* Determine the current floor *)
+IF ButtonOn0 OR ButtonFor0 THEN
+	x:=0;
+ELSIF ButtonOn1 OR ButtonFor1 THEN
+	x:=1;
+ELSIF ButtonOn2 OR ButtonFor2 THEN
+	x:=2;
+END_IF;
+
+IF OnFloor0 THEN
+	y:=0;
+ELSIF OnFloor1 THEN
+	y:=1;
+ELSIF OnFloor2 THEN
+	y:=2;
+END_IF;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="INIT">
+      <ST><![CDATA[;
+y := 2;
+x :=2;]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>

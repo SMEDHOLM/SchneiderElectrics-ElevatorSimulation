@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE System SYSTEM "../LibraryElement.dtd">
+<System Name="System" Comment="System Configuration">
+  <Attribute Name="System.Device.FolderPath" Value="DEV0,DEV1" />
+  <Identification Standard="61499-1" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/3/2016" />
+  <Application ID="A4ABD8400116F035" Name="APP1">
+    <SubAppNetwork>
+      <SubApp ID="6F8EB6D0B3250F1" Name="CTL" Type="ControlSBA" x="1040" y="500" Namespace="Main" />
+      <FB ID="2EBC4BA4FDEFFE6B" Name="Plant" Type="Model" x="2220" y="500" Namespace="Main" />
+      <EventConnections>
+        <Connection Source="CTL.CNF" Destination="Plant.REQ" />
+        <Connection Source="Plant.CNF" Destination="CTL.REQ" dx1="79.0625" dx2="40" dy="-240">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.INITO" Destination="CTL.INIT" dx1="49.0625" dx2="30" dy="-110" />
+      </EventConnections>
+      <DataConnections>
+        <Connection Source="CTL.LightON_Button0" Destination="Plant.LightON_Button0" />
+        <Connection Source="CTL.LightON_Button1" Destination="Plant.LightON_Button1" />
+        <Connection Source="CTL.LightON_Button2" Destination="Plant.LightON_Button2" />
+        <Connection Source="CTL.LightON_Panel0" Destination="Plant.LightON_Panel0" />
+        <Connection Source="CTL.LightON_Panel1" Destination="Plant.LightON_Panel1" />
+        <Connection Source="CTL.LightON_Panel2" Destination="Plant.LightON_Panel2" />
+        <Connection Source="Plant.door2Opened" Destination="CTL.DoorOpened2" dx1="49.0625" dx2="30" dy="90" />
+        <Connection Source="Plant.door1Opened" Destination="CTL.DoorOpened1" dx1="79.0625" dx2="60" dy="200">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door0Opened" Destination="CTL.DoorOpened0" dx1="99.0625" dx2="100" dy="280">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door2Closed" Destination="CTL.DoorClosed2" dx1="119.0625" dx2="120" dy="360">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door1Closed" Destination="CTL.DoorClosed1" dx1="139.0625" dx2="140" dy="460">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.door0Closed" Destination="CTL.DoorClosed0" dx1="159.0625" dx2="180" dy="540">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor2" Destination="CTL.ButtonFor2" dx1="299.0625" dx2="320" dy="-1220">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor1" Destination="CTL.ButtonFor1" dx1="259.0625" dx2="280" dy="-1120">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.requestFloor0" Destination="CTL.ButtonFor0" dx1="239.0625" dx2="240" dy="-1040">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorAtFloor0" Destination="CTL.OnFloor0" dx1="119.0625" dx2="80" dy="-480">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorAtFloor1" Destination="CTL.OnFloor1" dx1="139.0625" dx2="100" dy="-580">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.elevatorAtFloor2" Destination="CTL.OnFloor2" dx1="159.0625" dx2="120" dy="-680">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonFloor0" Destination="CTL.ButtonOn0" dx1="179.0625" dx2="160" dy="-760">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonFloor1" Destination="CTL.ButtonOn1" dx1="199.0625" dx2="200" dy="-840">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="Plant.buttonFloor2" Destination="CTL.ButtonOn2" dx1="219.0625" dx2="220" dy="-940">
+          <AvoidsNodes>false</AvoidsNodes>
+        </Connection>
+        <Connection Source="CTL.liftUp" Destination="Plant.motorUp" />
+        <Connection Source="CTL.liftDown" Destination="Plant.motorDown" />
+        <Connection Source="CTL.door0" Destination="Plant.door0" />
+        <Connection Source="CTL.door1" Destination="Plant.door1" />
+        <Connection Source="CTL.door2" Destination="Plant.door2" />
+      </DataConnections>
+    </SubAppNetwork>
+  </Application>
+  <Device ID="ffce78e9-25c1-473e-9667-c6dcc3f3bf60" Name="DEV0" Type="Soft_dPAC" x="534.6564" y="459.8542" Namespace="SE.DPAC">
+    <Resource ID="AFC605D93B0DAF48" Name="RES0" Type="EMB_RES_ECO" Namespace="Runtime.Management">
+      <FBNetwork>
+        <FB ID="5A8F7BFBE453BE8E" Name="Plant" Type="Model" x="2220" y="500" Namespace="Main" />
+        <FB ID="B8321F95D02BDB56" Name="APP1_CTL_MRG" Type="E_MERGE" x="5660" y="180" Namespace="IEC61499.Standard" />
+        <FB ID="F2E834C5BF24A68C" Name="APP1_CTL_BTNs" Type="Btn_lock" x="1100" y="120" Namespace="Main" />
+        <FB ID="612EE1896463DD94" Name="APP1_CTL_Motor" Type="CabinControl" x="3400" y="220" Namespace="Main" />
+        <FB ID="CBDB0B086C1B5DE7" Name="CHAN_DEV1_RES0" Type="COMM_CHANN_DESC" x="500" y="300" Namespace="Runtime.System">
+          <Attribute Name="Endpoint.Port" Value="51300" />
+          <Parameter Name="PEERNAME" Value="'DEV1.RES0'" />
+        </FB>
+        <EventConnections>
+          <Connection Source="APP1_CTL_MRG.EO" Destination="Plant.REQ" dx1="41.5415" dx2="70" dy="-110" />
+          <Connection Source="Plant.CNF" Destination="APP1_CTL_BTNs.REQ" dx1="70" dx2="170" dy="-550" />
+          <Connection Source="Plant.INITO" Destination="APP1_CTL_BTNs.INIT" dx1="50" dx2="190" dy="-490" />
+          <Connection Source="APP1_CTL_Motor.CNF" Destination="APP1_CTL_MRG.EI1" dx1="130" />
+          <Connection Source="APP1_CTL_BTNs.INITO" Destination="APP1_CTL_Motor.INIT" dx1="180" />
+          <Connection Source="APP1_CTL_BTNs.CNF" Destination="APP1_CTL_Motor.REQ" dx1="160" />
+          <Connection Source="APP1_CTL_Motor.RST" Destination="APP1_CTL_BTNs.RESET" dx1="70" dx2="150" dy="-330" />
+          <Connection Source="START.COLD" Destination="Plant.INIT">
+            <Points>
+              <Points>
+                <X>145.348938</X>
+                <Y>35</Y>
+              </Points>
+              <Points>
+                <X>152.499985</X>
+                <Y>35</Y>
+              </Points>
+              <Points>
+                <X>152.499985</X>
+                <Y>12</Y>
+              </Points>
+              <Points>
+                <X>450</X>
+                <Y>12</Y>
+              </Points>
+              <Points>
+                <X>450</X>
+                <Y>135</Y>
+              </Points>
+              <Points>
+                <X>550</X>
+                <Y>135</Y>
+              </Points>
+            </Points>
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+          <Connection Source="START.WARM" Destination="Plant.INIT">
+            <Points>
+              <Points>
+                <X>145.348938</X>
+                <Y>50</Y>
+              </Points>
+              <Points>
+                <X>152.499985</X>
+                <Y>50</Y>
+              </Points>
+              <Points>
+                <X>152.499985</X>
+                <Y>12</Y>
+              </Points>
+              <Points>
+                <X>450</X>
+                <Y>12</Y>
+              </Points>
+              <Points>
+                <X>450</X>
+                <Y>135</Y>
+              </Points>
+              <Points>
+                <X>550</X>
+                <Y>135</Y>
+              </Points>
+            </Points>
+            <AvoidsNodes>false</AvoidsNodes>
+          </Connection>
+        </EventConnections>
+        <DataConnections>
+          <Connection Source="APP1_CTL_BTNs.L1" Destination="Plant.LightON_Button0" dx1="220" />
+          <Connection Source="APP1_CTL_BTNs.L2" Destination="Plant.LightON_Button1" dx1="200" />
+          <Connection Source="APP1_CTL_BTNs.L3" Destination="Plant.LightON_Button2" dx1="180" />
+          <Connection Source="APP1_CTL_BTNs.L4" Destination="Plant.LightON_Panel0" dx1="160" />
+          <Connection Source="APP1_CTL_BTNs.L5" Destination="Plant.LightON_Panel1" dx1="140" />
+          <Connection Source="APP1_CTL_BTNs.L6" Destination="Plant.LightON_Panel2" dx1="120" />
+          <Connection Source="Plant.requestFloor2" Destination="APP1_CTL_BTNs.B6" dx1="250" dx2="30" dy="450" />
+          <Connection Source="Plant.requestFloor1" Destination="APP1_CTL_BTNs.B5">
+            <Points>
+              <Points>
+                <X>750.2344</X>
+                <Y>305</Y>
+              </Points>
+              <Points>
+                <X>807.7344</X>
+                <Y>305</Y>
+              </Points>
+              <Points>
+                <X>807.7344</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>257.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>257.5</X>
+                <Y>180</Y>
+              </Points>
+              <Points>
+                <X>270</X>
+                <Y>180</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="Plant.requestFloor0" Destination="APP1_CTL_BTNs.B4">
+            <Points>
+              <Points>
+                <X>750.2344</X>
+                <Y>290</Y>
+              </Points>
+              <Points>
+                <X>802.7344</X>
+                <Y>290</Y>
+              </Points>
+              <Points>
+                <X>802.7344</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>252.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>252.5</X>
+                <Y>165</Y>
+              </Points>
+              <Points>
+                <X>270</X>
+                <Y>165</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="Plant.buttonFloor0" Destination="APP1_CTL_BTNs.B1" dx1="150" dx2="130" dy="-930" />
+          <Connection Source="Plant.buttonFloor1" Destination="APP1_CTL_BTNs.B2">
+            <Points>
+              <Points>
+                <X>750.2344</X>
+                <Y>260</Y>
+              </Points>
+              <Points>
+                <X>792.7344</X>
+                <Y>260</Y>
+              </Points>
+              <Points>
+                <X>792.7344</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>242.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>242.5</X>
+                <Y>135</Y>
+              </Points>
+              <Points>
+                <X>270</X>
+                <Y>135</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="Plant.buttonFloor2" Destination="APP1_CTL_BTNs.B3">
+            <Points>
+              <Points>
+                <X>750.2344</X>
+                <Y>275</Y>
+              </Points>
+              <Points>
+                <X>797.7344</X>
+                <Y>275</Y>
+              </Points>
+              <Points>
+                <X>797.7344</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>542.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>247.5</X>
+                <Y>217.5</Y>
+              </Points>
+              <Points>
+                <X>247.5</X>
+                <Y>150</Y>
+              </Points>
+              <Points>
+                <X>270</X>
+                <Y>150</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="Plant.elevatorAtFloor0" Destination="APP1_CTL_Motor.OnFloor0" dx1="90" />
+          <Connection Source="Plant.elevatorAtFloor1" Destination="APP1_CTL_Motor.OnFloor1" dx1="110" />
+          <Connection Source="Plant.elevatorAtFloor2" Destination="APP1_CTL_Motor.OnFloor2" dx1="130" />
+          <Connection Source="APP1_CTL_Motor.liftUp" Destination="Plant.motorUp" dx1="66.66675" dx2="90" dy="-430" />
+          <Connection Source="APP1_CTL_Motor.liftDown" Destination="Plant.motorDown" dx1="46.66675" dx2="110" dy="-490" />
+          <Connection Source="APP1_CTL_BTNs.L1" Destination="APP1_CTL_Motor.ButtonOn0">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>120</Y>
+              </Points>
+              <Points>
+                <X>429.0052</X>
+                <Y>120</Y>
+              </Points>
+              <Points>
+                <X>429.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>190</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>190</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="APP1_CTL_BTNs.L2" Destination="APP1_CTL_Motor.ButtonOn1">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>135</Y>
+              </Points>
+              <Points>
+                <X>424.0052</X>
+                <Y>135</Y>
+              </Points>
+              <Points>
+                <X>424.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>205</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>205</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="APP1_CTL_BTNs.L3" Destination="APP1_CTL_Motor.ButtonOn2">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>150</Y>
+              </Points>
+              <Points>
+                <X>419.0052</X>
+                <Y>150</Y>
+              </Points>
+              <Points>
+                <X>419.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>220</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>220</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="APP1_CTL_BTNs.L4" Destination="APP1_CTL_Motor.ButtonFor0">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>165</Y>
+              </Points>
+              <Points>
+                <X>414.0052</X>
+                <Y>165</Y>
+              </Points>
+              <Points>
+                <X>414.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>235</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>235</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="APP1_CTL_BTNs.L5" Destination="APP1_CTL_Motor.ButtonFor1">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>180</Y>
+              </Points>
+              <Points>
+                <X>409.0052</X>
+                <Y>180</Y>
+              </Points>
+              <Points>
+                <X>409.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>250</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>250</Y>
+              </Points>
+            </Points>
+          </Connection>
+          <Connection Source="APP1_CTL_BTNs.L6" Destination="APP1_CTL_Motor.ButtonFor2">
+            <Points>
+              <Points>
+                <X>394.0052</X>
+                <Y>195</Y>
+              </Points>
+              <Points>
+                <X>404.0052</X>
+                <Y>195</Y>
+              </Points>
+              <Points>
+                <X>404.0052</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>107.5</Y>
+              </Points>
+              <Points>
+                <X>762.5</X>
+                <Y>265</Y>
+              </Points>
+              <Points>
+                <X>845</X>
+                <Y>265</Y>
+              </Points>
+            </Points>
+          </Connection>
+        </DataConnections>
+      </FBNetwork>
+    </Resource>
+    <FBNetwork />
+  </Device>
+  <Device ID="db8a111d-5757-4c12-909a-c7c60fe0051b" Name="DEV1" Type="Soft_dPAC" x="540.5885" y="1039.854" Namespace="SE.DPAC">
+    <Resource ID="25548E160CC27F2B" Name="RES0" Type="EMB_RES_ECO" Namespace="Runtime.Management">
+      <FBNetwork>
+        <FB ID="50182162F1BA31A8" Name="APP1_CTL_Doors" Type="DoorControl" x="4480" y="720" Namespace="Main" />
+        <FB ID="6354E36DFD40A26D" Name="APP1_CTL_DLY" Type="E_DELAY" x="5940" y="780" Namespace="IEC61499.Standard">
+          <Parameter Name="DT" Value="T#3000ms" />
+        </FB>
+        <FB ID="A8C68B7408FDFD07" Name="CHAN_DEV0_RES0" Type="COMM_CHANN_DESC" x="500" y="300" Namespace="Runtime.System">
+          <Attribute Name="Endpoint.Port" Value="51301" />
+          <Parameter Name="PEERNAME" Value="'DEV0.RES0'" />
+        </FB>
+        <EventConnections>
+          <Connection Source="APP1_CTL_Doors.T1" Destination="APP1_CTL_DLY.START" dx1="10" />
+          <Connection Source="APP1_CTL_DLY.EO" Destination="APP1_CTL_Doors.T1exp" dx1="48.5" dx2="10" dy="-170" />
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+    <FBNetwork />
+  </Device>
+  <Mapping From="APP1.Plant" To="DEV0.RES0" />
+  <Mapping From="APP1.CTL.MRG" To="DEV0.RES0.APP1_CTL_MRG" />
+  <Mapping From="APP1.CTL.BTNs" To="DEV0.RES0.APP1_CTL_BTNs" />
+  <Mapping From="APP1.CTL.Motor" To="DEV0.RES0.APP1_CTL_Motor" />
+  <Mapping From="APP1.CTL.Doors" To="DEV1.RES0.APP1_CTL_Doors" />
+  <Mapping From="APP1.CTL.DLY" To="DEV1.RES0.APP1_CTL_DLY" />
+</System>

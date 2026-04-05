@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="23def37a-aa61-4c31-9d48-791ce2be83cc" Name="CallButton" Comment="Composite Function Block Type" Namespace="Main">
+  <Attribute Name="Configuration.FB.IDCounter" Value="5" />
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmbH" Version="0.0" Author="Andrei" Date="6/3/2016" Remarks="template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="LightON" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="LightON" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="ButtonPressed" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="ButtonPressed" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="LightON" Type="BOOL" Comment="Input event qualifier" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="ButtonPressed" Type="BOOL" Comment="Output event qualifier" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork>
+    <FB ID="3" Name="IThis" Type="CallButton_HMI" x="2160" y="700" Namespace="Main">
+      <Parameter Name="QI" Value="TRUE" />
+    </FB>
+    <FB ID="4" Name="FB1" Type="ChangeDetect_B" x="1560" y="820" Namespace="Main" />
+    <Input Name="INIT" x="1640" y="651.8542" Type="Event" />
+    <Input Name="REQ" x="880" y="831.8542" Type="Event" />
+    <Input Name="LightON" x="880" y="1031.854" Type="Data" />
+    <Output Name="INITO" x="2860" y="711.8542" Type="Event" />
+    <Output Name="CNF" x="2860" y="771.8542" Type="Event" />
+    <Output Name="ButtonPressed" x="2908.292" y="1091.854" Type="Data" />
+    <EventConnections>
+      <Connection Source="REQ" Destination="FB1.REQ" dx1="40" />
+      <Connection Source="INIT" Destination="IThis.INIT" dx1="40.83337" />
+      <Connection Source="FB1.CHG" Destination="IThis.REQ" dx1="57.22925" />
+      <Connection Source="IThis.INITO" Destination="INITO" dx1="40" />
+      <Connection Source="IThis.CHG" Destination="CNF" dx1="60" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="LightON" Destination="FB1.INP" dx1="42.89587" />
+      <Connection Source="FB1.OUT" Destination="IThis.LightON" />
+      <Connection Source="IThis.Button" Destination="ButtonPressed" dx1="44.91675" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

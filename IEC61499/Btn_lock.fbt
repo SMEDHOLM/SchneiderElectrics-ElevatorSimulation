@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE FBType SYSTEM "../LibraryElement.dtd">
+<FBType GUID="c6385d0e-8f67-4f55-830e-fc117bdf2623" Name="Btn_lock" Comment="Basic Function Block Type" Namespace="Main">
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="nxtControl GmBH" Version="0.0" Author="vv263" Date="7/27/2023" Remarks="Template" />
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request">
+        <With Var="B1" />
+        <With Var="B2" />
+        <With Var="B3" />
+        <With Var="B4" />
+        <With Var="B5" />
+        <With Var="B6" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request">
+        <With Var="B1" />
+        <With Var="B2" />
+        <With Var="B3" />
+        <With Var="B4" />
+        <With Var="B5" />
+        <With Var="B6" />
+      </Event>
+      <Event Name="RESET" />
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm">
+        <With Var="L1" />
+        <With Var="L2" />
+        <With Var="L3" />
+        <With Var="L4" />
+        <With Var="L5" />
+        <With Var="L6" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation">
+        <With Var="L1" />
+        <With Var="L2" />
+        <With Var="L3" />
+        <With Var="L4" />
+        <With Var="L5" />
+        <With Var="L6" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="B1" Type="BOOL" Comment="Input event qualifier" />
+      <VarDeclaration Name="B2" Type="BOOL" />
+      <VarDeclaration Name="B3" Type="BOOL" />
+      <VarDeclaration Name="B4" Type="BOOL" />
+      <VarDeclaration Name="B5" Type="BOOL" />
+      <VarDeclaration Name="B6" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="L1" Type="BOOL" Comment="Output event qualifier" />
+      <VarDeclaration Name="L2" Type="BOOL" />
+      <VarDeclaration Name="L3" Type="BOOL" />
+      <VarDeclaration Name="L4" Type="BOOL" />
+      <VarDeclaration Name="L5" Type="BOOL" />
+      <VarDeclaration Name="L6" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <Attribute Name="FBType.Basic.Algorithm.Order" Value="INIT,L1ON,L2ON,L3ON,L4ON,L5ON,L6ON" />
+    <InternalVars>
+      <VarDeclaration Name="NumOn" Type="INT" />
+      <VarDeclaration Name="NumLitOn" Type="INT" />
+    </InternalVars>
+    <ECC>
+      <ECState Name="START" Comment="Initial State" x="452.9412" y="121.4117" />
+      <ECState Name="NOT_PRESSED" Comment="Initialization" x="1427.53" y="912.2877">
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="STATE2" x="669.999" y="1874.032">
+        <ECAction Algorithm="L2ON" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE3" x="2794.667" y="1671">
+        <ECAction Algorithm="L3ON" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE4" x="3064.857" y="1061.714">
+        <ECAction Algorithm="L4ON" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE5" x="3018.571" y="538.8572">
+        <ECAction Algorithm="L5ON" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE6" x="2355.143" y="238.2857">
+        <ECAction Algorithm="L6ON" Output="CNF" />
+      </ECState>
+      <ECState Name="INIT1" x="973.3334" y="400.5555">
+        <ECAction Algorithm="INIT" Output="INITO" />
+        <ECAction Output="CNF" />
+      </ECState>
+      <ECState Name="STATE1" x="201.1111" y="1210.555">
+        <ECAction Algorithm="L1ON" Output="CNF" />
+      </ECState>
+      <ECState Name="STATE7" x="148.3333" y="637.2224">
+        <ECAction Algorithm="INIT" Output="CNF" />
+      </ECState>
+      <ECTransition Source="START" Destination="INIT1" Condition="INIT" x="649.2253" y="310.6102">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="146.8122,72.37592,172.6069,88.34179" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE2" Condition="REQ[B2]" x="1122.935" y="1418.812">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="313.1778,320.7136,257.5211,392.9676" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE3" Condition="REQ[B3]" x="2164.494" y="1230.619">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="493.9469,275.7707,590.0476,329.3679" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE4" Condition="REQ[B4]" x="2288.695" y="894.153">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="521.5266,213.1685,621.7641,223.6852" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE5" Condition="REQ[B5]" x="2202.419" y="647.3673">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="494.2196,169.5436,605.2452,144.6622" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE6" Condition="REQ[B6]" x="1816.401" y="528.3977">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="418.9984,151.7545,483.3489,104.6295" />
+      </ECTransition>
+      <ECTransition Source="STATE2" Destination="NOT_PRESSED" Condition="1" x="1066.905" y="1331.171">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="240.7002,363.3235,296.838,291.9305" />
+      </ECTransition>
+      <ECTransition Source="INIT1" Destination="NOT_PRESSED" Condition="1" x="1238.844" y="598.1375">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="294.6058,127.8708,325.2444,161.4839" />
+      </ECTransition>
+      <ECTransition Source="STATE1" Destination="NOT_PRESSED" Condition="1" x="790.9375" y="1000.21">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="164.8777,255.6609,236.1234,237.0936" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE1" Condition="REQ[B1]" x="850.7368" y="1154.448">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="255.089,283.7795,172.3974,304.4265" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="STATE7" Condition="(L1 OR L2 OR L3 OR L4 OR L5 OR L6) AND RESET " x="835.2577" y="828.7045">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="254.419,219.2351,179.2377,202.2432" />
+      </ECTransition>
+      <ECTransition Source="STATE7" Destination="NOT_PRESSED" Condition="1" x="897.6031" y="732.4636">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="188.549,171.3482,276.1632,191.2376" />
+      </ECTransition>
+      <ECTransition Source="STATE3" Destination="NOT_PRESSED" Condition="1" x="2058.379" y="1353.761">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="561.9203,370.8713,465.0367,316.0919" />
+      </ECTransition>
+      <ECTransition Source="STATE4" Destination="NOT_PRESSED" Condition="1" x="2327.618" y="1078.653">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="635.1024,278.5967,535.8185,270.4615" />
+      </ECTransition>
+      <ECTransition Source="STATE5" Destination="NOT_PRESSED" Condition="1" x="2295.605" y="791.3094">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="626.3914,189.8282,523.5849,214.1121" />
+      </ECTransition>
+      <ECTransition Source="STATE6" Destination="NOT_PRESSED" Condition="1" x="1924.962" y="640.7543">
+        <Attribute Name="Configuration.Transaction.BezierPoints" Value="514.0547,142.106,447.8018,189.1824" />
+      </ECTransition>
+      <ECTransition Source="NOT_PRESSED" Destination="NOT_PRESSED" Condition="REQ" x="1427.53" y="1094.374" />
+    </ECC>
+    <Algorithm Name="INIT" Comment="Initialization algorithm">
+      <ST><![CDATA[L1:=FALSE;
+L2:=FALSE;
+L3:=FALSE;
+L4:=FALSE;
+L5:=FALSE;
+L6:=FALSE;]]></ST>
+    </Algorithm>
+    <Algorithm Name="L1ON">
+      <ST><![CDATA[;
+L1:=TRUE;
+L2:=FALSE;
+L3:=FALSE;
+L4:=FALSE;
+L5:=FALSE;
+L6:=FALSE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="L2ON">
+      <ST><![CDATA[;
+L1:=FALSE;
+L2:=TRUE;
+L3:=FALSE;
+L4:=FALSE;
+L5:=FALSE;
+L6:=FALSE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="L3ON">
+      <ST><![CDATA[;
+L1:=FALSE;
+L2:=FALSE;
+L3:=TRUE;
+L4:=FALSE;
+L5:=FALSE;
+L6:=FALSE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="L4ON">
+      <ST><![CDATA[;
+L1:=FALSE;
+L2:=FALSE;
+L3:=FALSE;
+L4:=TRUE;
+L5:=FALSE;
+L6:=FALSE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="L5ON">
+      <ST><![CDATA[;
+L1:=FALSE;
+L2:=FALSE;
+L3:=FALSE;
+L4:=FALSE;
+L5:=TRUE;
+L6:=FALSE;
+]]></ST>
+    </Algorithm>
+    <Algorithm Name="L6ON">
+      <ST><![CDATA[;
+L1:=FALSE;
+L2:=FALSE;
+L3:=FALSE;
+L4:=FALSE;
+L5:=FALSE;
+L6:=TRUE;
+]]></ST>
+    </Algorithm>
+  </BasicFB>
+</FBType>
